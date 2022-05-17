@@ -19,13 +19,10 @@
     "write-file-atomic": "^4.0.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.23.0",
-    "@typescript-eslint/parser": "^5.23.0",
+    "@babel/preset-env": "^7.17.10",
     "eslint": "^8.15.0",
-    "eslint-config-standard": "^17.0.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.0",
-    "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.1.0"
   },
   "type": "module",
