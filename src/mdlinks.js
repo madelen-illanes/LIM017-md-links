@@ -1,15 +1,10 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable prefer-promise-reject-errors */
-/* eslint-disable indent */
-/* eslint-disable no-multiple-empty-lines */
-/* eslint-disable eol-last */
-/* eslint-disable space-before-blocks */
-/* eslint-disable semi */
+
 import fs from 'fs'
 import path, { resolve } from 'path'
 
 // Costante que va a guadar la ruta que usuario ingresa en consola
 const pathUser = process.argv[2];
+console.log(process.argv)
 
 // Verificamos si la ruta es valida
 export const validatePath = (pathverify) => {
@@ -40,7 +35,7 @@ console.log(path.extname('./documents/file1.md'))
 // Función para leer un archivo
 export const readTheFile = (pathUser) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(pathUser, 'UTF-8', (error, file) => {
+    fs.readFile(pathUser, 'utf8', (error, file) => {
       if (error){
         throw error;
       }
@@ -48,10 +43,11 @@ export const readTheFile = (pathUser) => {
         reject('Archivo con formato inválido');
       }
       resolve(file);
-    })
-  })
+    });
+  });
 };
-console.log(readTheFile('./README.md'))
+
+
 
 // La ruta es absoluta ?
 // export const absolutePath = (pathverify) => {
