@@ -1,5 +1,7 @@
 import fs from 'fs'
 import path, { resolve } from 'path';
+import MarkdownIt from 'markdown-it';
+import { JSDOM } from 'jsdom';
 
 // Costante que va a guadar la ruta que usuario ingresa en consola
 //const pathUser = process.argv[2];
