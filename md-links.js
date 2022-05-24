@@ -1,9 +1,9 @@
 import fs from 'fs'
-import path, { resolve } from 'path'
+import path, { resolve } from 'path';
 
 // Costante que va a guadar la ruta que usuario ingresa en consola
-const pathUser = process.argv[2];
-console.log(process.argv)
+//const pathUser = process.argv[2];
+//console.log(process.argv)
 
 // Verificamos si la ruta es valida
 export const validatePath = (pathverify) => {
@@ -12,18 +12,38 @@ export const validatePath = (pathverify) => {
   }
   return false;
 };
-console.log(fs.existsSync('./documents/file1.md'))
+console.log(validatePath('./documents/file1.md'))
 
 // Transformo a absoluta
 export const transformToAbsolutePath = (pathverify) => {
-  const absoluteRoute = path.resolve(pathverify).normalize();
-  if (!path.isAbsolute(pathUser)){
-    return absoluteRoute;
+  if (validatePath && !path.isAbsolute(pathverify)){
+    const isConverted = path.resolve(pathverify).normalize();
+      return isConverted;
   } else {
-    return pathUser;
+      return pathverify;
   }
 }
-console.log(path.resolve('./documents/file1.md'))
+console.log(transformToAbsolutePath('./documents/file1.md'))
+
+// Función recursiva verifica si es directorio o archivo
+let fileMd=[]
+const getFileMd = (pathUser) => {
+  if (fs.statSync(pathUser).isDirectory()){
+    let directory = pathUser
+    fs.readdirSync(pathUser).forEach(file => {
+      const routeAbsolute = path.join(directory,file)
+      return getFileMd(pathUser=routeAbsolute)
+    })
+ } else if(fs.statSync(pathUser).isFile()){
+      if(path.extname(pathUser) ==='.md'){
+        fileMd.push(pathUser)
+      }
+ } else{
+   console.log('unknown path')
+ }
+ return fileMd;
+}
+console.log(getFileMd('./documents'))
 
 // Función para identificar si es un archivo md
 export const identifyFile = (pathUser) => {

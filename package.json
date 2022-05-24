@@ -9,6 +9,9 @@
   "version": "1.0.0",
   "description": "\"Librería que analiza archivos markdown y proporciona las estadísticas de sus links\"",
   "main": "index.js",
+  "bin": {
+    "md-Links": "./cli.js"
+  },
   "directories": {
     "test": "test"
   },
