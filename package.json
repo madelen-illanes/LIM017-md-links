@@ -10,21 +10,23 @@
   "description": "\"Librería que analiza archivos markdown y proporciona las estadísticas de sus links\"",
   "main": "index.js",
   "bin": {
-    "md-Links": "./api-links.js"
+    "md-Links": "cli.js"
   },
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "chalk": "^2.4.2",
     "fill-range": "^7.0.1",
     "markdown-it": "^13.0.1",
     "merge-stream": "^2.0.0",
+    "node-fetch": "^3.2.4",
     "write-file-atomic": "^4.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.17.12",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "jest": "^28.1.0"
@@ -44,5 +46,6 @@
   "bugs": {
     "url": "https://github.com/madelen-illanes/LIM017-md-links/issues"
   },
-  "homepage": "https://github.com/madelen-illanes/LIM017-md-links#readme"
+  "homepage": "https://github.com/madelen-illanes/LIM017-md-links#readme",
+  "keywords": []
 }
