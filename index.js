@@ -1,8 +1,8 @@
-/* eslint-disable import/no-unresolved */
-import { transformToAbsolutePath, getFileMd, readFile, getObject } from './md-links.js'
+/* eslint-disable object-curly-newline */
+import fs from 'fs';
+import { transformToAbsolutePath, getFileMd, readFile, getObject } from './md-links.js';
 
-
-    export const mdLinks = (path, options) => {
+const mdLinks = (path, options) => {
     return new Promise((resolve, reject) => {
     const convertThepath = transformToAbsolutePath(path) //Función que convierte ruta en absoluta
     console.log('convertThepath', convertThepath);

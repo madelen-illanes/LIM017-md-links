@@ -30,10 +30,10 @@ export const transformToAbsolutePath = (route) => {
 };
 
 // Valida si la ruta es una carpeta
-const folderPath = (route) => fs.statSync(route).isDirectory();
+export const folderPath = (route) => fs.statSync(route).isDirectory();
 
 // Iterar directorio
-const readDirectory = (route) => fs.readdirSync(route, 'utf-8');
+export const readDirectory = (route) => fs.readdirSync(route, 'utf-8');
 
 // Función para identificar si es un archivo con extención md
 export const identifyFile = (route) => {
@@ -57,7 +57,7 @@ export const getFileMd = (pathUser) => new Promise((resolve, reject) => {
 console.log(getFileMd('./documents'));
 
 // Convierte archivo md en html
-const renderMdtoHTML = (pathUser) => {
+export const renderMdtoHTML = (pathUser) => {
   const md = new MarkdownIt();
   const render = md.render(pathUser);
   return render;

@@ -13,7 +13,7 @@ const readOptionsApi = () => {
             options.validate = true
         } else {
             options = {};
-  //      }
+     }
     }
     return options
 }
