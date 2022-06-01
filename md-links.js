@@ -91,7 +91,7 @@ export const readFile = (pathReceived) => {
 console.log(readFile('./documents/file2.md'));
 
 // Extraer la información de cada link que se encuentra en el md
-const getObject = (readFile) => {
+export const getObject = (readFile) => {
   let arrayPromises = [];
   arrayPromises = readFile.map((obj) => fetch(obj.href)
     .then((resolve) => ({
@@ -102,7 +102,7 @@ const getObject = (readFile) => {
     .catch((error) => ({
       ...obj,
       status: '404',
-      message: 'Not Found⚠️ ',
+      message: 'Not Found',
     })));
   return Promise.all(arrayPromises);
 };
@@ -112,7 +112,7 @@ getObject(readFile('./documents/file2.md')).then((resolve) => console.log(resolv
 export const totalUniqueLinks = (arraylinks) =>{
   const totalLinks = arraylinks.length;
   const uniqueLinks = new Set(arraylinks.map((element) => element.href));
-  const stats = `${('Total:')} ${(totalLinks)}\n${('Unique:')} ${(uniqueLinks.size)}\n`;
+  const stats = `${('Total:')} ${(totalLinks)}\r\n${('Unique:')} ${(uniqueLinks.size)}\r\n`;
   return stats;
 };
 console.log(totalUniqueLinks(['./documents/file2.md']));
@@ -120,7 +120,7 @@ console.log(totalUniqueLinks(['./documents/file2.md']));
 // Funcion para verificar si esta roto el link
 export const brokenLink = (arraylinks) => {
   const broken = arraylinks.filter(element => element.message === 'Fail');
-  const stats = `${('Broken:')} ${(broken.length)}\n`;
+  const stats = `${('Broken:')} ${(broken.length)}\r\n`;
   return stats;
 };
 console.log(brokenLink(['./documents/file2.md']));
