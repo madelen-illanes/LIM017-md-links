@@ -1,4 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable eol-last */
 // eslint-disable-next-line linebreak-style
 /* eslint-disable no-shadow */
@@ -12,9 +13,8 @@
 import fs from 'fs';
 import path, { resolve } from 'path';
 import MarkdownIt from 'markdown-it';
-import axios from 'axios';
 import fetch from 'node-fetch';
-// import { JSDOM } from 'jsdom';
+
 // const pathUser = process.argv[2];
 
 // Verificamos si la ruta es valida
@@ -91,52 +91,22 @@ export const readFile = (pathReceived) => {
 console.log(readFile('./documents/file2.md'));
 
 // Extraer la información de cada link que se encuentra en el md
-// const getObject = (readFile) => {
-//   let arrayPromises = [];
-//   arrayPromises = readFile.map((obj) => fetch(obj.href)
-//     .then((resolve) => ({
-//       ...obj,
-//       status: resolve.status,
-//       message: resolve.statusText,
-//     }))
-//     .catch((error) => ({
-//       ...obj,
-//       status: '404',
-//       message: 'Not Found⚠️ ',
-//     })));
-//   return Promise.all(arrayPromises);
-// };
-// getObject(readFile('./documents/file2.md')).then((resolve) => console.log(resolve));
-
-export const getObject = (route) => {
-  const promises = route.map(element => readFile(element).then((links) => {
-    console.log('links', links);
-    return Promise.all(
-      links.map((object) => {
-        console.log('OBJECT.HREF', object.href);
-        return axios
-          .get(object.href)
-          .then((result) =>
-          // result.status >= 200 && result.status <= 399 ? "Ok" : "Fail";
-            ({
-              href: object.href,
-              text: object.text,
-              file: object.file,
-              status: result.status,
-              message: 'Ok',
-            }))
-          .catch((error) => ({
-            href: object.href,
-            text: object.text,
-            file: object.file,
-            status: 404,
-            message: 'Fail',
-          }));
-      }),
-    );
-  }));
-  return Promise.all(promises);
+const getObject = (readFile) => {
+  let arrayPromises = [];
+  arrayPromises = readFile.map((obj) => fetch(obj.href)
+    .then((resolve) => ({
+      ...obj,
+      status: resolve.status,
+      message: resolve.statusText,
+    }))
+    .catch((error) => ({
+      ...obj,
+      status: '404',
+      message: 'Not Found⚠️ ',
+    })));
+  return Promise.all(arrayPromises);
 };
+getObject(readFile('./documents/file2.md')).then((resolve) => console.log(resolve));
 
 // Funciòn para el links total y unique
 export const totalUniqueLinks = (arraylinks) =>{

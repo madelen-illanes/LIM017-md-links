@@ -4,18 +4,6 @@
 import { transformToAbsolutePath, validatePath, getFileMd } from '../md-links.js';
 
 const routeTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
-const readFileTest = [
-  {
-    href: 'https://es.wikipedia.org/wiki/Markdown',
-    text: 'Markdown',
-    file: './documents/file2.md',
-  },
-  {
-    href: 'https://nodejs.org/',
-    text: 'Node.js',
-    file: './documents/file2.md',
-  },
-];
 
 describe('validatePath', () => {
   it('show resolve path', () => {
