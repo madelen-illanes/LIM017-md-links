@@ -35,7 +35,7 @@
   "scripts": {
     "eslint": "eslint --ext .js test/",
     "test": "jest --coverage",
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
