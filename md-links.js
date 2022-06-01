@@ -1,15 +1,12 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable eol-last */
-/* eslint-disable no-lone-blocks */
-/* eslint-disable no-unused-expressions */
 // eslint-disable-next-line linebreak-style
 /* eslint-disable no-shadow */
 /* eslint-disable linebreak-style */
-/* eslint-disable no-plusplus */
 /* eslint-disable arrow-parens */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-sequences */
 /* eslint-disable no-useless-escape */
-/* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-cond-assign */
 import fs from 'fs';
@@ -94,24 +91,36 @@ export const readFile = (pathReceived) => {
 console.log(readFile('./documents/file2.md'));
 
 // Extraer la información de cada link que se encuentra en el md
-const getObjetsLinks = (route) => readFile(route).then((links) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  Promise.all(
-    links.map((object) => axios
-      .get(object.href)
-      .then((result) => ({
-        href: object.href,
-        text: object.text,
-        file: object.file,
-        status: result.status,
-        message: 'Ok',
-      }))
-      .catch((error) => ({
-        href: object.href,
-        text: object.text,
-        file: object.file,
-        status: 404,
-        message: 'Fail',
-      }))),
-  ));
-// console.log(getObjetsLinks('./documents/file2.md'));
+const getObject = (readFile) => {
+  let arrayPromises = [];
+  arrayPromises = readFile.map((obj) => fetch(obj.href)
+    .then((resolve) => ({
+      ...obj,
+      status: resolve.status,
+      message: resolve.statusText,
+    }))
+    .catch((error) => ({
+      ...obj,
+      status: '404',
+      message: 'Not Found⚠️ ',
+    })));
+  return Promise.all(arrayPromises);
+};
+getObject(readFile('./documents/file2.md')).then((resolve) => console.log(resolve));
+
+// Funciòn para el links total y unique
+export const totalUniqueLinks = (arraylinks) =>{
+  const totalLinks = arraylinks.length;
+  const uniqueLinks = new Set(arraylinks.map((element) => element.href));
+  const stats = `${('Total:')} ${(totalLinks)}\n${('Unique:')} ${(uniqueLinks.size)}\n`;
+  return stats;
+};
+console.log(totalUniqueLinks(['./documents/file2.md']));
+
+// Funcion para verificar si esta roto el link
+export const brokenLink = (arraylinks) => {
+  const broken = arraylinks.filter(element => element.message === 'Fail');
+  const stats = `${('Broken:')} ${(broken.length)}\n`;
+  return stats;
+};
+console.log(brokenLink(['./documents/file2.md']));
