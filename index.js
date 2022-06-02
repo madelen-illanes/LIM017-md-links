@@ -1,5 +1,3 @@
-/* eslint-disable object-curly-newline */
-import fs from 'fs';
 import { transformToAbsolutePath, getFileMd, readFile, getObject } from './md-links.js';
 
 const mdLinks = (path, options) => {
@@ -21,3 +19,7 @@ const mdLinks = (path, options) => {
         });
     })
 };
+mdLinks('./documents', {validate:false})
+.then((res) => console.log(res))
+.catch((error) => console.log(error));
+ console.log("chaooooooo")

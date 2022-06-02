@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {mdLinks} from './index.js'
+//import {mdLinks} from './index.js'
 import { totalUniqueLinks, brokenLink,} from './md-links.js'
 const argv = process.argv;
 
@@ -17,3 +17,4 @@ const readOptionsApi = () => {
     }
     return options
 }
+console.log("holaaaaaaaaaaaaaaaa")

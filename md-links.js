@@ -1,18 +1,5 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable eol-last */
-// eslint-disable-next-line linebreak-style
-/* eslint-disable no-shadow */
-/* eslint-disable linebreak-style */
-/* eslint-disable arrow-parens */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-sequences */
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-cond-assign */
 import fs from 'fs';
 import path, { resolve } from 'path';
-import MarkdownIt from 'markdown-it';
 import fetch from 'node-fetch';
 
 // const pathUser = process.argv[2];
@@ -28,7 +15,7 @@ export const transformToAbsolutePath = (route) => {
   }
   return route;
 };
-
+console.log(transformToAbsolutePath('./documents/file2.md'))
 // Valida si la ruta es una carpeta
 export const folderPath = (route) => fs.statSync(route).isDirectory();
 
@@ -42,19 +29,19 @@ export const identifyFile = (route) => {
 };
 
 // lectura de la ruta
-const fileMd = [];
-export const getFileMd = (pathUser) => new Promise((resolve, reject) => {
-  if (folderPath(pathUser)) {
-    Promise.all(readDirectory(pathUser).map(element => new Promise((resolve, reject) => {
-      const joinRoute = path.join(pathUser, element);
-      getFileMd(joinRoute);
-    })));
-  } else if (identifyFile(pathUser)) {
-    fileMd.push(pathUser);
-  }
-  resolve(fileMd);
-});
-console.log(getFileMd('./documents'));
+// const fileMd = [];
+// export const getFileMd = (pathUser) => new Promise((resolve, reject) => {
+//   if (folderPath(pathUser)) {
+//     readDirectory(pathUser).map(element => {
+//       const joinRoute = path.join(pathUser, element);
+//       getFileMd(joinRoute);
+//     });
+//   } else if (identifyFile(pathUser)) {
+//     fileMd.push(pathUser);
+//   }
+//   resolve(fileMd);
+// });
+// console.log(getFileMd('./documents').then((res) => console.log(res)));
 
 // Convierte archivo md en html
 export const renderMdtoHTML = (pathUser) => {

@@ -1,7 +1,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
+import fetch from 'node-fetch';
 import { transformToAbsolutePath, validatePath, getFileMd } from '../md-links.js';
+jest.mock('node-fetch', ()=>jest.fn())
 
 const routeTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
 
