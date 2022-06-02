@@ -23,21 +23,39 @@ export const transformToAbsolutePath = (route) => {
   }
   return route;
 };
-console.log(transformToAbsolutePath('./documents/file2.md'));
+console.log(transformToAbsolutePath('./documents'));
 
 // Valida si la ruta es una carpeta
-export const folderPath = (route) => fs.statSync(route).isDirectory();
+export const folderPath = (route) => fs.lstatSync(route).isDirectory();
 
 // Iterar directorio
-export const readDirectory = (route) => fs.readdirSync(route, 'utf-8');
+export const readDirectory = (route) => fs.readdirSync(route);
+
+// Is file
+const isfile = (route) => fs.lstatSync(route).isFile();
+
+// lee archivos con READFILE asincrónico
+const getreadFile = (route) => fs.readFileSync(route, 'utf8');
 
 // Función para identificar si es un archivo con extención md
-export const identifyFile = (route) => {
-  const md = path.extname(route);
-  return md === '.md';
-};
+export const identifyFile = (route) => path.extname(route) === '.md';
 
 // lectura de la ruta
+export function getFileMd(route) {
+  let arrFiles = [];
+  if (isfile(route) && identifyFile(route)) {
+    arrFiles.push(route);
+  } else if (folderPath(route)) {
+    const files = readDirectory(route);
+    files.forEach((file) => {
+      const newRoute = path.join(route, file);
+      const reading = getFileMd(newRoute);
+      arrFiles = reading.concat(arrFiles);
+    });
+  }
+  return arrFiles;
+}
+// console.log(getFileMd('./documents/file3.md'));
 // const fileMd = [];
 // export const getFileMd = (pathUser) => new Promise((resolve, reject) => {
 //   if (folderPath(pathUser)) {
@@ -58,6 +76,7 @@ export const renderMdtoHTML = (pathUser) => {
   const render = md.render(pathUser);
   return render;
 };
+// console.log(renderMdtoHTML('./documents/file3.md'));
 
 // leer archivos y obtener href, text , file
 export const readFile = (pathReceived) => {
@@ -83,7 +102,7 @@ export const readFile = (pathReceived) => {
   }
   return links;
 };
-console.log(readFile('./documents/file2.md'));
+// console.log(readFile('./documents/file3.md'));
 
 // Extraer la información de cada link que se encuentra en el md
 export const getObject = (readFile) => {
@@ -101,7 +120,7 @@ export const getObject = (readFile) => {
     })));
   return Promise.all(arrayPromises);
 };
-getObject(readFile('./documents/file2.md')).then((resolve) => console.log(resolve));
+// getObject(readFile('./documents/file3.md')).then((resolve) => console.log(resolve));
 
 // Funciòn para el links total y unique
 export const totalUniqueLinks = (arraylinks) => {
@@ -110,7 +129,7 @@ export const totalUniqueLinks = (arraylinks) => {
   const stats = `${('Total:')} ${(totalLinks)}\r\n${('Unique:')} ${(uniqueLinks.size)}\r\n`;
   return stats;
 };
-console.log(totalUniqueLinks(['./documents/file2.md']));
+// console.log(totalUniqueLinks(['./documents/file3.md']));
 
 // Funcion para verificar si esta roto el link
 export const brokenLink = (arraylinks) => {
@@ -118,4 +137,4 @@ export const brokenLink = (arraylinks) => {
   const stats = `${('Broken:')} ${(broken.length)}\r\n`;
   return stats;
 };
-console.log(brokenLink(['./documents/file2.md']));
+// console.log(brokenLink(['./documents/file2.md']));
