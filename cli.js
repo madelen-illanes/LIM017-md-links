@@ -1,20 +1,22 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node
 
-//import {mdLinks} from './index.js'
-import { totalUniqueLinks, brokenLink,} from './md-links.js'
+// import {mdLinks} from './index.js'
+import {
+  totalUniqueLinks, brokenLink,
+} from './md-links.js';
+
 const argv = process.argv;
 
-
-//Opciones API
+// Opciones API
 const readOptionsApi = () => {
-    let options = { validate: false };cc
-    if (argv.length > 3) {
-        if (argv.includes('--validate') || argv.includes('--v')) {
-            options.validate = true
-        } else {
-            options = {};
-     }
+  let options = { validate: false };
+  if (argv.length > 3) {
+    if (argv.includes('--validate') || argv.includes('--v')) {
+      options.validate = true;
+    } else {
+      options = {};
     }
-    return options
-}
-console.log("holaaaaaaaaaaaaaaaa")
+  }
+  return options;
+};
+// console.log('holaaaaaaaaaaaaaaaa');

@@ -1,7 +1,15 @@
+/* eslint-disable no-sequences */
+/* eslint-disable eol-last */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-cond-assign */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-useless-escape */
+/* eslint-disable linebreak-style */
 import fs from 'fs';
 import path, { resolve } from 'path';
+import MarkdownIt from 'markdown-it';
 import fetch from 'node-fetch';
-
 // const pathUser = process.argv[2];
 
 // Verificamos si la ruta es valida
@@ -15,7 +23,8 @@ export const transformToAbsolutePath = (route) => {
   }
   return route;
 };
-console.log(transformToAbsolutePath('./documents/file2.md'))
+console.log(transformToAbsolutePath('./documents/file2.md'));
+
 // Valida si la ruta es una carpeta
 export const folderPath = (route) => fs.statSync(route).isDirectory();
 
@@ -63,7 +72,6 @@ export const readFile = (pathReceived) => {
     } else {
       pathReceived = pathReceived.replace(/\\/g, '/');
     }
-
     while ((result = regExp.exec(parsedFile)) !== null) {
       const obj = {
         href: result[0, 3],
@@ -96,7 +104,7 @@ export const getObject = (readFile) => {
 getObject(readFile('./documents/file2.md')).then((resolve) => console.log(resolve));
 
 // Funciòn para el links total y unique
-export const totalUniqueLinks = (arraylinks) =>{
+export const totalUniqueLinks = (arraylinks) => {
   const totalLinks = arraylinks.length;
   const uniqueLinks = new Set(arraylinks.map((element) => element.href));
   const stats = `${('Total:')} ${(totalLinks)}\r\n${('Unique:')} ${(uniqueLinks.size)}\r\n`;
@@ -106,7 +114,7 @@ console.log(totalUniqueLinks(['./documents/file2.md']));
 
 // Funcion para verificar si esta roto el link
 export const brokenLink = (arraylinks) => {
-  const broken = arraylinks.filter(element => element.message === 'Fail');
+  const broken = arraylinks.filter((element) => element.message === 'Fail');
   const stats = `${('Broken:')} ${(broken.length)}\r\n`;
   return stats;
 };
