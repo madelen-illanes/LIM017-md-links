@@ -16,7 +16,6 @@
     "prefer-destructuring": 0,
     "import/extensions": 0,
     "import/prefer-default-export": 0,
-    "indent-ImportDeclaration": 0,
     "eol-last":0,
     "object-curly-newline":"warn"
     }

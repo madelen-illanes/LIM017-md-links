@@ -9,7 +9,7 @@ jest.mock('node-fetch', () => jest.fn());
 
 const routeTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
 const fileTest = '.\\documents\\file3.md';
-const routAbsoluteTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
+// const routAbsoluteTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
 const arrayObject = [
   {
     href: 'https://github.com/markdown-it/markdown-it',
