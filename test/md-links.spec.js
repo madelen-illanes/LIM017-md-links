@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import fetch from 'node-fetch';
-import MarkdownIt from 'markdown-it';
+// import MarkdownIt from 'markdown-it';
 import {
   transformToAbsolutePath, validatePath, readFile, getObject, getFileMd,
 } from '../md-links.js';
@@ -59,24 +59,25 @@ describe('readFile', () => {
     expect(readFile(fileTest)).toEqual(arrayObject);
   });
 });
-// Obtener objeto con fetch
+//  Obtener objeto con fetch
 describe('getObject', () => {
   it('true : link status: 200', () => {
     fetch.mockResolvedValue({ status: 200 });
-    return getObject([
+    return getObject(
       {
+        file: './documents/file3.md',
         href: 'https://github.com/markdown-it/markdown-it',
         text: 'markdown-it',
-        file: './documents/file3.md',
       },
-    ]).then((data) => {
+    ).then((data) => {
       expect(data).toEqual([
         {
-          href: 'https://github.com/markdown-it/markdown-it',
-          text: 'markdown-it',
           file: './documents/file3.md',
-          status: 200,
+          href: 'https://github.com/markdown-it/markdown-it',
           message: 'OK',
+          icon: '✔',
+          status: 200,
+          text: 'markdown-it',
         },
       ]);
     });
