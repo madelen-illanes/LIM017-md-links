@@ -3,7 +3,7 @@ import {
   transformToAbsolutePath, readFile, getObject,
 } from './md-links.js';
 
-export const mdLinks = (path, options) => new Promise((resolve, reject) => {
+export const mdLinks = (path, options = { validate: false }) => new Promise((resolve, reject) => {
   const verifyPath = transformToAbsolutePath(path);
   if (verifyPath === '') {
     reject('path invalid');
@@ -20,7 +20,6 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
     }
   }
 });
-
-// mdLinks(('./documents/file1.md'), { validate: false })
+// mdLinks(('./documents/file1.md'), { validate: true })
 //   .then((resolve) => console.log(resolve))
 //   .catch((error) => console.log(error));

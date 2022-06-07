@@ -1,47 +1,54 @@
-// #!/usr/bin/env node
+#!/usr/bin/env node
+/* eslint-disable max-len */
 
-// import chalk from 'chalk';
-// import { mdLinks } from './index.js';
-// import {
-//   totalUniqueLinks, brokenLink,
-// } from './md-links.js';
+import chalk from 'chalk';
+import process from 'node:process';
+import { mdLinks } from './index.js';
 
-// const argv = process.argv;
+const [, , ...args] = process.argv;
+const routes = args[0];
+const validate = args.includes('--validate');
+const stats = args.includes('--stats');
 
-//  Opciones API
-// const readOptionsApi = () => {
-//   let options = { validate: false };
-//   if (argv.length > 3) {
-//     if (argv.includes('--validate') || argv.includes('--v')) {
-//       options.validate = true;
-//     } else {
-//       options = {};
-//     }
-//   }
-//   return options;
-// };
-// // console.log(chalk.magenta('holaaaaaaaaaaaaaaaa'));
+if (args.length === 0 && !routes) {
+  const help = chalk.bold.whiteBright(`
+  _____________________________________________________________________________________
+      --validate         => Return link information: href, text, file, status, ok/fail.
+      --stats            => Returns the total and unique links.
+      --validate --stats => Returns the total, unique and broken links.
+  ______________________________________________________________________________________
+      `);
+  console.error(help);
+} else if (args.length === 1 && !validate && !stats) {
+  mdLinks(routes, false)
+    .then((result) => {
+      result.forEach((res) => console.log(chalk.greenBright(`${('href:')} ${(res.href)}\n${('text:')} ${(res.text)}\n${('file:')} ${(res.file)}\n`))); // href,test,file
+    });
+} else if (args.length === 2 && validate && !stats) {
+  mdLinks(routes, true)
+    .then((result) => {
+      result.forEach((res) => console.log(chalk.blueBright(`${('href:')} ${(res.href)}\n${('text:')} ${(res.text)}\n${('file:')} ${(res.file)}\n${('status:')} ${(res.status)}\n${('ok:')} ${(res.ok)}\n`)));
+    })
+    .catch(console.error);
+} else if (args.length === 2 && !validate && stats) {
+  mdLinks(routes, true)
+    .then((result) => {
+      const unique = [...new Set(result.map((element) => element.href))].length;
+      const total = result.length;
+      console.log(chalk.magenta(`${('Total:')} ${(total)}\n${('Unique:')} ${(unique)}`));// Total, Unique
+    });
+} else if (args.length === 3 && validate && stats) {
+  mdLinks(routes, true)
+    .then((result) => {
+      const unique = [...new Set(result.map((element) => element.href))].length;
+      const total = result.length; const broken = result.filter((element) => element.ok === 'Fail').length;
+      console.log(chalk.yellowBright(`${('Total:')} ${(total)}\n${('Unique:')} ${(unique)}\n${('Broken:')} ${(broken)}`)); // Total, Unique, Broken
+    })
+    .catch(console.error);
+}
+
+// console.log(process.argv[0]);
+// console.log(chalk.magenta('holaaaaaaaaaaaaaaaa'));
 // console.log(chalk.dim('holaaaaaaaaaaaaaaaa'));
 // console.log(chalk.inverse('holaaaaaaaaaaaaaaaa'));
 // console.log(chalk.strikethrough('holaaaaaaaaaaaaaaaa'));
-// mdLinks.mdLinks(argv[2], readOptionsApi())
-//   .then((res) => {
-//     console.log('RESSSS', res);
-//     if (argv.includes('--stats') || argv.includes('--s')) {
-//       console.table(totalAndUnique(res));
-//       if ((argv.includes('--validate') || argv.includes('--v'))) {
-//         console.table(broken(res));
-//       }
-//     } else if (argv.includes('--validate') || argv.includes('--v')) {
-//       res.forEach((e) => {
-//         console.log((`${e.file} ${e.href} ${e.message} ${e.status} ${e.text}\n`));
-//       });
-//     } else {
-//       res.forEach((e) => {
-//         console.log((`${e.file} ${e.href} ${e.text}\n`));
-//       });
-//     }
-//   })
-//   .catch((error) => {
-//     console.log(chalk.magenta('Ruta no valida', error));
-//   });

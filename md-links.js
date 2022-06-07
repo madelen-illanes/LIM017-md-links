@@ -9,8 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import MarkdownIt from 'markdown-it';
 import fetch from 'node-fetch';
-// const route = process.argv[2];
-// const [, , route] = process.argv;
+
 // Verificamos si la ruta es valida
 export const validatePath = (route) => fs.existsSync(route);
 
@@ -95,26 +94,37 @@ export const getObject = (readFile) => {
     }))
     .catch((error) => ({
       ...obj,
-      status: `Status no Found in: ${obj.file}`,
+      status: 'Status no Found',
       message: 'Not Found',
       icon: '✖',
     })));
   return Promise.all(arrayPromises);
 };
-
-// Función para el links total y unique
-export const totalUniqueLinks = (arraylinks) => {
-  const totalLinks = arraylinks.length;
-  const uniqueLinks = new Set(arraylinks.map((element) => element.href));
-  const stats = `${('Total:')} ${(totalLinks)}\r\n${('Unique:')} ${(uniqueLinks.size)}\r\n`;
-  return stats;
-};
-// console.log(totalUniqueLinks(['./documents/file1.md']));
-
-// Funcion para verificar si esta roto el link
-export const brokenLink = (arraylinks) => {
-  const broken = arraylinks.filter((element) => element.message === 'Fail');
-  const stats = `${('Broken:')} ${(broken.length)}\r\n`;
-  return stats;
-};
-// console.log(brokenLink(['./documents/file1.md']));
+// export const getObject = (linksCollection) => {
+//   const arrStatus = linksCollection.map((el) => {
+//     const fetchObj = fetch(el.href)
+//       .then((res) => {
+//         const msgStatus = res.status >= 200 && res.status <= 299 ? 'ok' : 'fail';
+//         const objStatus = {
+//           href: el.href, // href: URL encontrada.
+//           text: el.text, // text: Texto que aparecía dentro del link.
+//           file: el.file, // file: Ruta del archivo donde se encontró el link.
+//           status: res.status, // Código de respuesta HTTP.
+//           ok: msgStatus, // Mensaje 'fail' en caso de fallo u 'ok' en caso de éxito.
+//         };
+//         return objStatus;
+//       })
+//       .catch(() => ({
+//         href: el.href,
+//         text: el.text,
+//         file: el.file,
+//         status: 'Fail: Your request failed',
+//         ok: 'fail',
+//       }));
+//     return fetchObj;
+//   });
+//   return Promise.all(arrStatus);
+// };
+// getObject(('./documents/file1.md'), { validate: true })
+//   .then((resolve) => console.log(resolve))
+//   .catch((error) => console.log(error));
