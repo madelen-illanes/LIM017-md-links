@@ -1,6 +1,6 @@
 ## 1. Markdown Links 🔗
 
-![md-Links](https://github.com/madelen-illanes/LIM017-md-links/blob/main/src/images/md-Links.jpg)
+![md-Links](https://github.com/madelen-illanes/LIM017-md-links/blob/main/src/images/md-Links.png)
 
 Markdown Links es una librería que usa [Node.js](https://nodejs.org/), que lee y analiza archivos
 en formato `Markdown`, para verificar los links que contenga y reporta estadísticas.
@@ -43,7 +43,7 @@ Se obtienen los siguientes datos:
 * `status`: Código de respuesta HTTP.
 * `ok`: Mensaje `fail` en caso de fallo u `ok` en caso de éxito.
 ```
-![--validate](https://github.com/madelen-illanes/LIM017-md-links/blob/rama1/src/images/--validate.png)
+![--validate](https://github.com/madelen-illanes/LIM017-md-links/blob/main/src/images/--validate.png)
 
 #### Opción --stats
 
