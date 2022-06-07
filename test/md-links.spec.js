@@ -8,11 +8,16 @@ import {
 jest.mock('node-fetch', () => jest.fn());
 
 const routeTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
-const fileTest = '.\\documents\\file3.md';
+const fileTest = './documents/file3.md';
 // const routAbsoluteTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
 const arrayObject = [
   {
     href: 'https://github.com/markdown-it/markdown-it',
+    text: 'markdown-it',
+    file: './documents/file3.md',
+  },
+  {
+    href: 'ht://github.com/markdown-it/markdown-it',
     text: 'markdown-it',
     file: './documents/file3.md',
   },
@@ -51,35 +56,27 @@ describe('getFileMd', () => {
   });
 });
 
-// falta la del MarkdownIt
-
 // lectura de archivo
 describe('readFile', () => {
   it('show read file and obten href, text, file', () => {
     expect(readFile(fileTest)).toEqual(arrayObject);
   });
 });
+
 //  Obtener objeto con fetch
 describe('getObject', () => {
-  it('true : link status: 200', () => {
-    fetch.mockResolvedValue({ status: 200 });
-    return getObject(
-      {
-        file: './documents/file3.md',
-        href: 'https://github.com/markdown-it/markdown-it',
-        text: 'markdown-it',
-      },
-    ).then((data) => {
-      expect(data).toEqual([
-        {
-          file: './documents/file3.md',
-          href: 'https://github.com/markdown-it/markdown-it',
-          message: 'OK',
-          icon: '✔',
-          status: 200,
-          text: 'markdown-it',
-        },
-      ]);
-    });
-  });
+  const arrayValidateTest = [
+    {
+      file: './documents/file3.md',
+      href: 'https://github.com/markdown-it/markdown-it',
+      message: 'OK',
+      icon: '✔',
+      status: 200,
+      text: 'markdown-it',
+    },
+  ];
+  it('return array objects', () => getObject(readFile(fileTest))
+    .then((resolve) => {
+      expect(resolve).toEqual(arrayValidateTest);
+    }));
 });

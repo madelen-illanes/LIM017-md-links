@@ -81,7 +81,7 @@ export const readFile = (pathReceived) => {
   }
   return links;
 };
-
+// console.log(readFile('./documents/file3.md'));
 // Extraer la información de cada link que se encuentra en el md
 export const getObject = (readFile) => {
   let arrayPromises = [];
@@ -102,22 +102,22 @@ export const getObject = (readFile) => {
 };
 // export const getObject = (linksCollection) => {
 //   const arrStatus = linksCollection.map((el) => {
-//     const fetchObj = fetch(el.href)
+//     const fetchObj = fetch(obj.href)
 //       .then((res) => {
 //         const msgStatus = res.status >= 200 && res.status <= 299 ? 'ok' : 'fail';
 //         const objStatus = {
-//           href: el.href, // href: URL encontrada.
-//           text: el.text, // text: Texto que aparecía dentro del link.
-//           file: el.file, // file: Ruta del archivo donde se encontró el link.
-//           status: res.status, // Código de respuesta HTTP.
-//           ok: msgStatus, // Mensaje 'fail' en caso de fallo u 'ok' en caso de éxito.
+//           href: obj.href,
+//           text: obj.text,
+//           file: obj.file,
+//           status: res.status,
+//           ok: msgStatus,
 //         };
 //         return objStatus;
 //       })
 //       .catch(() => ({
-//         href: el.href,
-//         text: el.text,
-//         file: el.file,
+//         href: obj.href,
+//         text: obj.text,
+//         file: obj.file,
 //         status: 'Fail: Your request failed',
 //         ok: 'fail',
 //       }));
