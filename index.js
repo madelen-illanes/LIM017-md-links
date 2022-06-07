@@ -20,6 +20,6 @@ export const mdLinks = (path, options = { validate: false }) => new Promise((res
     }
   }
 });
-mdLinks(('./documents/file3.md'), { validate: false })
-  .then((resolve) => console.log(resolve))
-  .catch((error) => console.log(error));
+// mdLinks(('./documents/file3.md'), { validate: false })
+//   .then((resolve) => console.log(resolve))
+//   .catch((error) => console.log(error));

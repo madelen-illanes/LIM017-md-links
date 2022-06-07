@@ -1,17 +1,17 @@
-## 1. Markdown Links
+## 1. Markdown Links 🔗
 
 ![md-Links](https://github.com/madelen-illanes/LIM017-md-links/blob/main/src/images/md-Links.jpg)
 
 Markdown Links es una librería que usa [Node.js](https://nodejs.org/), que lee y analiza archivos
 en formato `Markdown`, para verificar los links que contenga y reporta estadísticas.
 
-## 2. Instalación:tw-1f518: 
+## 2. Instalación 🔧
 
 Instale la librería ejecutando el siguiente código:
 
 npm install md-Links-made
 
-## 3. Instrucciones de uso :tw-1f4bb:
+## 3. Instrucciones de uso 💻
 
 Puedes ingresar dos opciones: --validate y/o --stats
 
@@ -68,6 +68,6 @@ Broken: 1
 ```
 ![--validate--stats](https://github.com/madelen-illanes/LIM017-md-links/blob/rama1/src/images/--validate--stats.png)
 
-## 4. Autor :tw-1f33b:
+## 4. Autor 🌼
 
 Madelen Illanes

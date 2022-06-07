@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-sequences */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
@@ -81,7 +82,7 @@ export const readFile = (pathReceived) => {
   }
   return links;
 };
-// console.log(readFile('./documents/file3.md'));
+
 // Extraer la información de cada link que se encuentra en el md
 export const getObject = (readFile) => {
   let arrayPromises = [];
@@ -100,31 +101,3 @@ export const getObject = (readFile) => {
     })));
   return Promise.all(arrayPromises);
 };
-// export const getObject = (linksCollection) => {
-//   const arrStatus = linksCollection.map((el) => {
-//     const fetchObj = fetch(obj.href)
-//       .then((res) => {
-//         const msgStatus = res.status >= 200 && res.status <= 299 ? 'ok' : 'fail';
-//         const objStatus = {
-//           href: obj.href,
-//           text: obj.text,
-//           file: obj.file,
-//           status: res.status,
-//           ok: msgStatus,
-//         };
-//         return objStatus;
-//       })
-//       .catch(() => ({
-//         href: obj.href,
-//         text: obj.text,
-//         file: obj.file,
-//         status: 'Fail: Your request failed',
-//         ok: 'fail',
-//       }));
-//     return fetchObj;
-//   });
-//   return Promise.all(arrStatus);
-// };
-// getObject(('./documents/file1.md'), { validate: true })
-//   .then((resolve) => console.log(resolve))
-//   .catch((error) => console.log(error));
