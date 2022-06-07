@@ -1,19 +1,46 @@
 {
-  "name": "md-links",
+  "name": "lim017-md-links",
   "jest": {
     "verbose": true,
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     }
   },
-  "version": "0.1.0",
-  "engines": {
-    "node": ">=14.x"
+  "version": "1.0.0",
+  "description": "\"Librería que analiza archivos markdown y proporciona las estadísticas de sus links\"",
+  "main": "index.js",
+  "bin": {
+  "md-Links": "./cli.js"
   },
-  "devDependencies": {
-    "babel-jest": "^28.1.0"
+  "directories": {
+    "test": "test"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.17.10"
-  }
+    "chalk": "^2.4.2",
+    "markdown-it": "^13.0.1",
+    "node-fetch": "^3.2.4"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.17.12",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.0"
+  },
+  "type": "module",
+  "scripts": {
+    "eslint": "eslint --ext .js test/",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madelen-illanes/LIM017-md-links.git"
+  },
+  "author": "\"Madelen Illanes\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madelen-illanes/LIM017-md-links/issues"
+  },
+  "homepage": "https://github.com/madelen-illanes/LIM017-md-links#readme",
+  "keywords": []
 }
