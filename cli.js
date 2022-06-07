@@ -27,7 +27,6 @@ if (args.length === 0 && !routes) {
 } else if (args.length === 2 && validate && !stats) {
   mdLinks(routes, { validate: true })
     .then((result) => {
-     // console.log(result);
       result.forEach((res) => console.log(chalk.blueBright(`${('href:')} ${(res.href)}\n${('text:')} ${(res.text)}\n${('file:')} ${(res.file)}\n${('status:')} ${(res.status)}\n${('message:')} ${(res.message)}\n`)));
     })
     .catch(console.error);
@@ -42,7 +41,8 @@ if (args.length === 0 && !routes) {
   mdLinks(routes, { validate: true })
     .then((result) => {
       const unique = [...new Set(result.map((element) => element.href))].length;
-      const total = result.length; const broken = result.filter((element) => element.ok === 'Fail').length;
+      const total = result.length;
+      const broken = result.filter((element) => element.ok === 'Fail').length;
       console.log(chalk.yellowBright(`${('Total:')} ${(total)}\n${('Unique:')} ${(unique)}\n${('Broken:')} ${(broken)}`)); // Total, Unique, Broken
     })
     .catch(console.error);

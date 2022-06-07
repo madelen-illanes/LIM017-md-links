@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import fetch from 'node-fetch';
 // import MarkdownIt from 'markdown-it';
@@ -67,16 +68,30 @@ describe('readFile', () => {
 describe('getObject', () => {
   const arrayValidateTest = [
     {
-      file: './documents/file3.md',
       href: 'https://github.com/markdown-it/markdown-it',
+      text: 'markdown-it',
+      file: './documents/file3.md',
+      status: 200,
       message: 'OK',
       icon: '✔',
-      status: 200,
-      text: 'markdown-it',
     },
   ];
   it('return array objects', () => getObject(readFile(fileTest))
     .then((resolve) => {
       expect(resolve).toEqual(arrayValidateTest);
+    }));
+  const linksWitherror = [
+    {
+      href: 'ht://github.com/markdown-it/markdown-it',
+      text: 'markdown-it',
+      file: 'C:/Users/Madelen/LIM017-md-links/documents/file3.md',
+      status: 'Status no Found',
+      message: 'Not Found',
+      icon: '✖',
+    },
+  ];
+  it('return array objects status no found', () => getObject(readFile(fileTest))
+    .catch((error) => {
+      expect(error).toEqual(linksWitherror);
     }));
 });
