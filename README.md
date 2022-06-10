@@ -9,7 +9,7 @@ en formato `Markdown`, para verificar los links que contenga y reporta estadíst
 
 Instale la librería ejecutando el siguiente código:
 
-npm install md-Links-made
+npm install md-links-made
 
 ## 3. Instrucciones de uso 💻
 

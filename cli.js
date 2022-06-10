@@ -47,9 +47,3 @@ if (args.length === 0 && !routes) {
     })
     .catch(console.error);
 }
-
-// console.log(process.argv[0]);
-// console.log(chalk.magenta('holaaaaaaaaaaaaaaaa'));
-// console.log(chalk.dim('holaaaaaaaaaaaaaaaa'));
-// console.log(chalk.inverse('holaaaaaaaaaaaaaaaa'));
-// console.log(chalk.strikethrough('holaaaaaaaaaaaaaaaa'));
