@@ -2,11 +2,16 @@
 /* eslint-disable no-undef */
 // import fetch from 'node-fetch';
 // import MarkdownIt from 'markdown-it';
+import fetch from 'node-fetch';
 import {
   transformToAbsolutePath, validatePath, readFile, getObject, getFileMd,
 } from '../md-links.js';
 
 jest.mock('node-fetch', () => jest.fn());
+// ({
+//   __esModule: true,
+//   default: jest.fn(),
+// })
 
 const routeTest = 'C:\\Users\\Madelen\\LIM017-md-links\\documents';
 const fileTest = './documents/file3.md';
@@ -14,11 +19,6 @@ const fileTest = './documents/file3.md';
 const arrayObject = [
   {
     href: 'https://github.com/markdown-it/markdown-it',
-    text: 'markdown-it',
-    file: './documents/file3.md',
-  },
-  {
-    href: 'ht://github.com/markdown-it/markdown-it',
     text: 'markdown-it',
     file: './documents/file3.md',
   },
@@ -65,33 +65,36 @@ describe('readFile', () => {
 });
 
 //  Obtener objeto con fetch
-// describe('getObject', () => {
-//   const arrayValidateTest = [
-//     {
-//       href: 'https://github.com/markdown-it/markdown-it',
-//       text: 'markdown-it',
-//       file: './documents/file3.md',
-//       status: 200,
-//       message: 'OK',
-//       icon: '✔',
-//     },
-//   ];
-//   it('return array objects', () => getObject(readFile(fileTest))
-//     .then((resolve) => {
-//       expect(resolve).toEqual(arrayValidateTest);
-//     }));
-//   const linksWitherror = [
-//     {
-//       href: 'ht://github.com/markdown-it/markdown-it',
-//       text: 'markdown-it',
-//       file: 'C:/Users/Madelen/LIM017-md-links/documents/file3.md',
-//       status: 'Status no Found',
-//       message: 'Not Found',
-//       icon: '✖',
-//     },
-//   ];
-//   it('return array objects status no found', () => getObject(readFile(fileTest))
-//     .catch((error) => {
-//       expect(error).toEqual(linksWitherror);
-//     }));
-// });
+describe('getObject', () => {
+  const arrayValidateTest = [
+    {
+      href: 'https://github.com/markdown-it/markdown-it',
+      text: 'markdown-it',
+      file: './documents/file3.md',
+      status: 200,
+      message: 'OK',
+      icon: '✔',
+    },
+  ];
+  it('return array objects', () => {
+    fetch.mockResolvedValue({ status: 200, statusText: 'OK' });
+    return getObject(readFile(fileTest))
+      .then((resolve) => {
+        expect(resolve).toEqual(arrayValidateTest);
+      });
+  });
+  const linksWitherror = [
+    {
+      href: 'ht://github.com/markdown-it/markdown-it',
+      text: 'markdown-it',
+      file: 'C:/Users/Madelen/LIM017-md-links/documents/file3.md',
+      status: 'Status no Found',
+      message: 'Not Found',
+      icon: '✖',
+    },
+  ];
+  it('return array objects status no found', () => getObject(readFile(fileTest))
+    .catch((error) => {
+      expect(error).toEqual(linksWitherror);
+    }));
+});
